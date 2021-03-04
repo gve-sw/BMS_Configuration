@@ -1,0 +1,44 @@
+
+name: Upload Python Package
+on:
+  release:
+    types: [created]
+
+jobs:
+  build-n-deploy:
+    runs-on: ubuntu-16.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '2.x'
+
+    - name: Python Dependency Installation
+      uses: py-actions/py-dependency-install@v2.1.0
+      with:
+        path: requirements.txt
+        update-pip: true
+
+    - name: Build and publish
+      run: |
+        pyinstaller --onefile --clean -n bms_iot apply_configuration.py --distpath .
+
+    - name: action-zip
+      run: zip -qq -r bms_iot.zip *.csv config/logger.conf bms_iot
+
+    - name: Create Release
+      uses: ncipollo/release-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        allowUpdates: true
+        artifacts: ./bms_iot.zip
+        artifactContentType: application/zip
+        prerelease: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+

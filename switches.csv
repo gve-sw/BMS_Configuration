@@ -1,0 +1,2 @@
+switch,hostname,port,username,password
+s1,<hostname/IP>,22,<username>,<password>

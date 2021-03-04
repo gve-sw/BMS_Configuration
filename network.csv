@@ -1,0 +1,2 @@
+﻿switch,vlanid,ipaddress,mac,interface
+s1,x,<x.x.x.x>,xxxx.xxxx.xxx,Gigxxx/x/1
