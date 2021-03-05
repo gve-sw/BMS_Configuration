@@ -40,6 +40,10 @@ s1,x,<x.x.x.x>,xxxx.xxxx.xxx,xxx/x/1
 >Execute the following command to start the script
 
     $ python apply_configuration.py -c network.csv -d switches.csv
+    
+    or
+    
+    $ ./bms_iot -c network.csv -d switches.csv
 
 use ``` --revert```flag to unbind the configuration 
 
